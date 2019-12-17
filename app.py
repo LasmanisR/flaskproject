@@ -14,7 +14,7 @@ for pin in pins:
    GPIO.output(pin, GPIO.LOW)
 
 @app.route("/")
-def index():
+def main():
    for pin in pins:
       pins[pin]['state'] = GPIO.input(pin)
    templateData = {
@@ -23,7 +23,7 @@ def index():
    return render_template('main.html', **templateData)
 
 @app.route("/<changePin>/<action>")
-def index(changePin, action):
+def action(changePin, action):
    changePin = int(changePin)
    deviceName = pins[changePin]['name']
    if action == "on":
@@ -43,4 +43,4 @@ def index(changePin, action):
    return render_template('main.html', **templateData)
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', debug=True)
+   app.run(host='0.0.0.0', port=80, debug=True)
