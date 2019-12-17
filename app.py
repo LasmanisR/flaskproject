@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 GPIO.setmode(GPIO.BCM)
 
-   GPIO.setup(25, GPIO.OUT)
-   GPIO.output(25, GPIO.LOW)
+GPIO.setup(25, GPIO.OUT)
+GPIO.output(25, GPIO.LOW)
 
 @app.route("/")
 def main():
