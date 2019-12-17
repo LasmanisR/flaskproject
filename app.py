@@ -10,11 +10,11 @@ while True:
 time.sleep(2)
 htmltext = htmlfile.read()
 print(htmltext)
-if (htmltext == b'S1ON')
+if (htmltext == b'S1ON'):
    GPIO.output(16, True)
    print ("LED ON")
    time.sleep(1)
-if (htmltext == b'S1OFF')
+if (htmltext == b'S1OFF'):
    GPIO.output(16, False)
    print ("LED OFF")
    time.sleep(1)
