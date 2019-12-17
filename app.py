@@ -1,15 +1,13 @@
 import RPi.GPIO as GPIO
 import time
-#import urllib.request
 import urllib2
 #Initialize Raspberry PI GPIO
 GPIO.setmode(GPIO.BOARD)
 #GPIO23
 GPIO.setup(16, GPIO.OUT)
 while True:
-    #htmlfile = urllib.request.urlopen("https://iotguruhomeautomation.000webhostapp.com/buttonStatus.php")
 	htmlfile = urllib2.urlopen("https://iotguruhomeautomation.000webhostapp.com/buttonStatus.php")
-    time.sleep(2)
+   time.sleep(2)
     htmltext = htmlfile.read()
     print(htmltext)
     if (htmltext == b'S1ON'):
