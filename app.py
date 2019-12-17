@@ -6,5 +6,5 @@ GPIO.setup(4, GPIO.OUT, initial=GPIO.LOW) # Set pin 8 to be an output pin and se
 while True: # Run forever
  GPIO.output(4, GPIO.HIGH) # Turn on
  sleep(1) # Sleep for 1 second
- GPIO.output(8, GPIO.LOW) # Turn off
+ GPIO.output(4, GPIO.LOW) # Turn off
  sleep(1) # Sleep for 1 second
