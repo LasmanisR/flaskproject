@@ -1,21 +1,23 @@
-import RPi.GPIO as GPIO
-import time
+from flask import *
+import things
 
-import urllib2
+app = Flask(__name__)
+pi_things = things.PiThings()
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(16, GPIO.OUT)
+@app.route("/")
+def hello():
+      button = pi_things.read_button()
+      return render_template('index.html', button=button)
 
-while True:
-   htmlfile = urllib2.urlopen("https://iotguruhomeautomation.000webhostapp.com/buttonStatus.php")
-time.sleep(2)
-htmltext = htmlfile.read()
-print(htmltext)
-if (htmltext == b'S1ON'):
-   GPIO.output(16, True)
-   print ("LED ON")
-   time.sleep(1)
-if (htmltext == b'S1OFF'):
-   GPIO.output(16, False)
-   print ("LED OFF")
-   time.sleep(1)
+@app.route("/led/<int:state>", methods=['POST'])
+def led(state):
+    if state == 0:
+        pi_things.set_led(False)
+    elif state == 1:
+        pi_things.set_led(True)
+    else:
+        return ('Unknown LED state', 400)
+    return ('', 204)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True, port=80)
