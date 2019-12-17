@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
 <head>
-<title> VADJIKA DIODES</title>
-<link rel="styleSheet" href="/static/style.css"/>
+   <title>VADJIKA DIODES</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<img src="/static/dogMeme.jpg" width="300px" height="300px" alt="Because You Normie"/>
-<h1>Actuators</h1><br>
-<h2>Status</h2>
-<h3> RED LED --> {{ledRed}}</h3>
-<h3> YELLOW LED --> {{ledYellow}}</h3>
-<h3> GREEN LED --> {{ledGreen}}</h3><br>
-<h2>Led Control</h2>
-<h3> RED LED CNTRL ==> <a href ="/ledRed/on" class="button">TURN ON</a> <a href="/ledRed/off" class = "button">TURN OFF</a></h3>
-<h3> YELLOW LED CNTRL ==> <a href="/ledYellow/on" class="button">TURN ON</a> <a href="/ledYellow/off" class="button">TURN OFF</a></h3>
-<h3> GREEN LED CNTRL ==> <a href="/ledGreen/on" class="button">TURN ON</a> <a href="/ledGreen/off" class="button">TURN OFF</a></h3>
+   <h1>VADJIKA DIODES</h1>
+   {% for pin in pins %}
+   <h2>{{ pins[pin].name }}
+   {% if pins[pin].state == true %}
+      is currently <strong>on</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
+   {% else %}
+      is currently <strong>off</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
+   {% endif %}
+   {% endfor %}
 </body>
 </html>
