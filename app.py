@@ -1,18 +1,10 @@
 import RPi.GPIO as GPIO
-from flask import Flask
-app = Flask(__name__)
-
+import time
 GPIO.setmode(GPIO.BCM)
-
-@app.route('/on')
-def turn_led_on():
-    GPIO.output(4, GPIO.HIGH)
-    return "OK"
-
-@app.route('/off')
-def turn_led_off():
-    GPIO.output(4, GPIO.LOW)
-    return "OK"
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+GPIO.setwarnings(False)
+GPIO.setup(4,GPIO.OUT)
+print "LED on"
+GPIO.output(18,GPIO.HIGH)
+time.sleep(1)
+print "LED off"
+GPIO.output(4,GPIO.LOW)
