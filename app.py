@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 import time
 
+import urllib2
+
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
 
