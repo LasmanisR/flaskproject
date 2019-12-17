@@ -7,7 +7,6 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
 while True:
 	htmlfile = urllib2.urlopen("https://iotguruhomeautomation.000webhostapp.com/buttonStatus.php")
-   time.sleep(2)
     htmltext = htmlfile.read()
     print(htmltext)
     if (htmltext == b'S1ON'):
