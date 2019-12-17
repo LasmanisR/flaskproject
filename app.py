@@ -1,17 +1,18 @@
 import RPi.GPIO as GPIO
+from flask import Flask
+app = Flask(__name__)
 
+GPIO.setmode(GPIO.BCM)
 
+@app.route('/on')
+def turn_led_on():
+    GPIO.output(4, GPIO.HIGH)
+    return "OK"
 
-class PiThings(object):
+@app.route('/off')
+def turn_led_off():
+    GPIO.output(4, GPIO.LOW)
+    return "OK"
 
-    def __init__(self):
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(17, GPIO.OUT)
-        GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-    def read_button(self):
-        return GPIO.input(4)
-
-    def set_led(self, value):
-        GPIO.output(17, value)
+if __name__ == '__main__':
+    app.run()
