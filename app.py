@@ -1,23 +1,17 @@
-from flask import *
-import things
+import RPi.GPIO as GPIO
 
-app = Flask(__name__)
-pi_things = things.PiThings()
 
-@app.route("/")
-def hello():
-      button = pi_things.read_button()
-      return render_template('index.html', button=button)
 
-@app.route("/led/<int:state>", methods=['POST'])
-def led(state):
-    if state == 0:
-        pi_things.set_led(False)
-    elif state == 1:
-        pi_things.set_led(True)
-    else:
-        return ('Unknown LED state', 400)
-    return ('', 204)
+class PiThings(object):
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=80)
+    def __init__(self):
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+    def read_button(self):
+        return GPIO.input(4)
+
+    def set_led(self, value):
+        GPIO.output(17, value)
